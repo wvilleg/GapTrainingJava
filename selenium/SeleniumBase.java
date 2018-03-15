@@ -56,7 +56,7 @@ public class SeleniumBase  {
 
         WebElement element = driver.findElement(By.name("q"));
 
-        element.sendKeys("Why does chrome eats my ram?");
+        element.sendKeys("Chrome memes");
         element.submit();
         sleep(3000);
 
