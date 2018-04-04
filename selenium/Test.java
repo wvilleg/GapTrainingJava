@@ -5,14 +5,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Test {
+public class Test extends SeleniumBase{
 
-    public static WebDriver driver;
 
     public static void main(String[] args) {
 
-    SeleniumBase seleniumBase = new SeleniumBase();
-    driver = seleniumBase.chooseYourFighter("Chrome");
+    SeleniumBase.chooseYourFighter("Chrome");
 
     driver.navigate().to("https://www.solarwinds.com/network-performance-monitor/registration");
 

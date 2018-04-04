@@ -4,13 +4,12 @@ import org.openqa.selenium.*;
 import java.io.File;
 import java.io.IOException;
 
-public class TakeScreenshot {
+public class TakeScreenshot extends SeleniumBase{
 
-    public static WebDriver driver;
     public static void main(String[] args) {
 
-        SeleniumBase seleniumBase = new SeleniumBase();
-        driver = seleniumBase.chooseYourFighter("Chrome");
+
+        SeleniumBase.chooseYourFighter("Chrome");
         driver.navigate().to("https://www.google.com/");
         takeScreenshot();
         WebElement element = driver.findElement(By.name("q"));
