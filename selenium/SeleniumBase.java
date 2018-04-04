@@ -1,74 +1,61 @@
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.firefox.GeckoDriverService;
+import org.openqa.selenium.firefox.FirefoxBinary;
 
 public class SeleniumBase  {
-    String browserName;
-    static WebDriver driver;
 
-    public SeleniumBase(String pname) {
-        setBrowserName(pname);
+    public static WebDriver driver;
+    public SeleniumBase(WebDriver pdriver) {
+        setDriver(pdriver);
     }
+
     public SeleniumBase() {
 
     }
 
-    public String getBrowserName() {
-        return browserName;
-    }
-
-    public void setBrowserName(String browserName) {
-        this.browserName = browserName;
-    }
-
-    public static WebDriver getDriver() {
+    public WebDriver getDriver() {
         return driver;
     }
 
-    static void setDriver(WebDriver driver) {
-        SeleniumBase.driver = driver;
+    public void setDriver(WebDriver pdriver) {
+        driver = pdriver;
     }
     
-    public String chooseYourFighter(String opt){
-        String result;
-        System.out.println("OPT " + opt);
+    public static WebDriver chooseYourFighter(String opt){
+
         if (opt.contentEquals("Chrome")) {
             driver = new ChromeDriver();
-            result = "Your fighter is the mighty Chrome , hide your RAM";
-        }else {
-            System.out.println("else");
+
+        }
+        if (opt.contentEquals("Firefox")){
+
+            //beta 2 version
+            //System.setProperty("webdriver.firefox.marionette", "./geckodriver.exe");
+
+            //beta 1 version
+            System.setProperty("webdriver.gecko.driver", "C:\\FirefoxGecko\\geckodriver.exe");
+
+            driver = new FirefoxDriver();
+
+
+
+            //WebDriver driver = new FirefoxDriver();
+
+
+        }
+        if (opt.contentEquals("IE")){
             driver = new InternetExplorerDriver();
-            result = "Your fighter is the old and wise IE, keep the RAM but it may not work";
         }
-        initFighter();
 
-        return result;
+
+        return driver;
     }
 
-    public void initFighter(){
-        driver.get("http://www.google.com");
-
-        WebElement element = driver.findElement(By.name("q"));
-
-        element.sendKeys("Chrome memes");
-        element.submit();
-        sleep(3000);
-
-        driver.navigate().to("http://wanna-joke.com/wp-content/uploads/2016/07/ram-chrome-parents.jpg");
-        sleep(5000);
-        driver.quit();
     }
-    public void sleep(int pmiliseconds){
-        try {
-            Thread.sleep(pmiliseconds);
-        } catch(InterruptedException e) {
-            System.out.println("INTERRUPTION");
-        }
-    }
-}
