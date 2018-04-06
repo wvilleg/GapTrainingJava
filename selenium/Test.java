@@ -10,9 +10,11 @@ public class Test extends SeleniumBase{
 
     public static void main(String[] args) {
 
-    SeleniumBase.chooseYourFighter("Chrome");
+    SeleniumBase.chooseYourFighter("Firefox");
 
     driver.navigate().to("https://www.solarwinds.com/network-performance-monitor/registration");
+    //fullscreen();
+
 
     driver.findElement(By.id("ci_firstName")).click();
     driver.findElement(By.id("ci_firstName")).sendKeys("Wendy");
@@ -50,5 +52,8 @@ public class Test extends SeleniumBase{
         } catch(InterruptedException e) {
             System.out.println("INTERRUPTION");
         }
+    }
+    public static void fullscreen(){
+        driver.manage().window().fullscreen();
     }
 }

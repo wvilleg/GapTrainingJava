@@ -2,12 +2,10 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.*;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.firefox.GeckoDriverService;
-import org.openqa.selenium.firefox.FirefoxBinary;
 
 public class SeleniumBase  {
 
@@ -42,7 +40,18 @@ public class SeleniumBase  {
             //beta 1 version
             System.setProperty("webdriver.gecko.driver", "C:\\FirefoxGecko\\geckodriver.exe");
 
-            driver = new FirefoxDriver();
+            //driver = new FirefoxDriver();
+            //Profile is deprecated
+
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            //firefoxOptions.setCapability("pageLoadStrategy","normal");
+            firefoxOptions.addArguments("start-maximazed");
+            //firefoxOptions.setCapability("applicationCacheEnabled","true");
+            //System.out.println(firefoxOptions.getCapability("applicationCacheEnabled"));
+
+            driver = new FirefoxDriver(firefoxOptions);
+            driver.get("https://www.solarwinds.com/downloads");
+            driver.quit();
 
 
 
@@ -56,6 +65,11 @@ public class SeleniumBase  {
 
 
         return driver;
+    }
+
+    public void chromeMax(){
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("start-maximized");
     }
 
     }
